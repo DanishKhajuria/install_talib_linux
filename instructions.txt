@@ -1,0 +1,12 @@
+install talib
+
+wget http://prdownloads.sourceforge.net/ta-lib/ta-lib-0.4.0-src.tar.gz && sudo tar -xzf ta-lib-0.4.0-src.tar.gz && sudo rm ta-lib-0.4.0-src.tar.gz && cd ta-lib/ && sudo ./configure --prefix=/usr && sudo make && sudo make install && cd ~ && sudo rm -rf ta-lib/ && pip install ta-lib
+
+test talib
+
+import talib as ta
+import yfinance as yf
+aapl = yf.download('AAPL', '2019-1-1','2019-12-27')
+aapl['Simple MA'] = ta.SMA(aapl['Close'],14)
+aapl['EMA'] = ta.EMA(aapl['Close'], timeperiod = 14)
+print(aapl.tail())
